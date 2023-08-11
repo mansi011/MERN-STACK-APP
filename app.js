@@ -8,10 +8,14 @@ const app=express();
 
 dotenv.config({path:'./config.env'});
 require('./db/conn.js');
+app.use(express.json());
 
 const User=require('./models/userSchema.js');
 
 const PORT=process.env.PORT;
+
+// we link router files to make our route easy
+app.use(require('./router/auth.js'));
 
 
 
@@ -43,9 +47,9 @@ const middleware=(req,res,next)=> {
 
 
 
-app.get('/', (req,res) => {
-    res.send(`Hello World from the home page`);
-});
+// app.get('/', (req,res) => {
+//     res.send(`Hello World from the home page`);
+// });
 
 app.get('/signin', (req,res) => {
     res.send(`Hello World from the login page`);
